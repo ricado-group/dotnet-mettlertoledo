@@ -1,0 +1,48 @@
+# Action Name
+name: "CodeQL"
+
+# When the Action will Run
+on:
+  schedule:
+    - cron: '0 7 * * 5'
+
+# Workflow Jobs
+jobs:
+  # Analyze Job
+  analyze:
+    name: Analyze
+    runs-on: ubuntu-latest
+
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+
+    steps:
+      # Step 1 - Checkout Code
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      
+      # Step 2 - Initialize CodeQL
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v1
+        with:
+          languages: csharp
+          queries: security-and-quality
+      
+      # Step 3 - Setup .NET 6 with GitHub Packages Authentication
+      - name: Setup .NET 6 with GitHub Packages Authentication
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 6.0.x
+          source-url: https://nuget.pkg.github.com/ricado-group/index.json
+        env:
+          NUGET_AUTH_TOKEN: ${{ secrets.GH_PACKAGES_PAT }}
+      
+      # Step 4 - Build the Library
+      - name: Run CodeQL Autobuild
+        uses: github/codeql-action/autobuild@v1
+      
+      # Step 5 - Perform CodeQL Analysis
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v1

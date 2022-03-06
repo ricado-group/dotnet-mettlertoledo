@@ -1,0 +1,30 @@
+# Action Name
+name: Main Automated Builds
+
+# When the Action will Run
+on:
+  push:
+    branches:
+      - master
+    tags:
+      - '*.*.*'
+
+# Workflow Jobs
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Step 1 - Checkout Code
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      
+      # Step 2 - Build and Publish
+      - name: Build and Publish
+        uses: ricado-group/dotnet-library-build-release-action@v1.2
+        with:
+          project-name: 'RICADO.MettlerToledo'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          private-nuget-url: 'https://nuget.pkg.github.com/ricado-group/index.json'
+          private-nuget-token: ${{ secrets.GH_PACKAGES_PAT }}
+          public-nuget-token: ${{ secrets.NUGET_APIKEY }}
+          publish-public: true
