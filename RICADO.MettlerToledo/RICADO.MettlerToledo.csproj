@@ -1,11 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net8.0;net7.0;net6.0;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>net10.0;net8.0;netstandard2.0</TargetFrameworks>
     <Authors>RICADO</Authors>
     <Company>RICADO Limited</Company>
-    <Description>A .NET 6+ and .NET Standard 2.0 Library for Communicating with Mettler Toledo Indicators</Description>
-    <Copyright>Copyright © RICADO Limited 2009 - 2024</Copyright>
+    <Description>A .NET 8+ and .NET Standard 2.0 Library for Communicating with Mettler Toledo Indicators</Description>
+    <Copyright>Copyright © RICADO Limited 2009 - 2026</Copyright>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageIcon>packageIcon.png</PackageIcon>
     <RepositoryUrl>https://github.com/ricado-group/dotnet-mettlertoledo</RepositoryUrl>
@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="RICADO.Sockets" Version="1.4.0" />
+    <PackageReference Include="RICADO.Sockets" Version="2.0.0" />
   </ItemGroup>
 
 </Project>
